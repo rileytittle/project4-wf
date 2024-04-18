@@ -1,0 +1,51 @@
+<mat-toolbar>
+    <button 
+    mat-icon-button class="example-icon" 
+    aria-label="Example icon-button with menu icon" 
+    type="button"
+    (click)="drawer.toggle()"
+    >
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Todo Lists</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>login</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>person_add
+        </mat-icon>
+    </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <mat-tab-group>
+        <mat-tab label="Public Lists">
+            <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+              </mat-list>              
+        </mat-tab>
+        <mat-tab label="My Lists">
+            <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+              </mat-list>              
+        </mat-tab>
+        <mat-tab label="Shared With Me">
+            <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+              </mat-list>              
+        </mat-tab>
+      </mat-tab-group>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <!--Here's where my main stuff will go-->
+    </div>
+  
+</mat-drawer-container>
