@@ -9,16 +9,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
+import { LoginComponent } from './view/login/login.component';
+import { HomeComponent } from './view/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SidebarComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
