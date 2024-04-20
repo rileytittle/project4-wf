@@ -14,13 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import { LoginComponent } from './view/login/login.component';
 import { HomeComponent } from './view/home/home.component';
+import { SignupComponent } from './view/signup/signup.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { HomeComponent } from './view/home/home.component';
     MatSidenavModule,
     MatTabsModule,
     BrowserAnimationsModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
