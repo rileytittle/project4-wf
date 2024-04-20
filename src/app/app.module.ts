@@ -16,6 +16,7 @@ import { LoginComponent } from './view/login/login.component';
 import { HomeComponent } from './view/home/home.component';
 import { SignupComponent } from './view/signup/signup.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatTabsModule,
     BrowserAnimationsModule,
     MatListModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
