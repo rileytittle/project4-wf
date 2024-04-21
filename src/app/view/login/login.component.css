@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
 }
-.child-div{
+.mat-card-content{
     display: flex;
     flex-direction: column;
     align-items: center;
