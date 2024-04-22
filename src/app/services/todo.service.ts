@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class TodoService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private _snackBar: MatSnackBar) { }
 
   async CreateUser(name:string, email:string, password:string){
     let userData = {
@@ -20,9 +21,15 @@ export class TodoService {
       console.log(response)
       return true
     }
-    catch(err){
-      console.log(err)
+    catch(err:any){
+      if(err.status == 400){
+        this._snackBar.open("User already exists", "OK", {duration: 3000})
+      }
       return false
     }
+  }
+
+  async LoginUser(email:string, password:string){
+    //not sure how this is supposed to be done because we have to use basic auth
   }
 }

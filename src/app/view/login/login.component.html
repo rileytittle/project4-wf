@@ -1,5 +1,5 @@
 <div class="main-div mat-app-background">
-    <mat-card>
+    <mat-card class="mat-card-content">
         <mat-card-content class="mat-card-content">
             <h2>Login</h2>
             <mat-form-field>
@@ -20,5 +20,8 @@
                 }
             </mat-form-field>
         </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="LoginUser()">Login</button>
+        </mat-card-actions>
     </mat-card>
 </div>
