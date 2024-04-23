@@ -16,19 +16,23 @@ export class UpdateaccountComponent {
   pwdFormControl = new FormControl("Enter a new password if you wish", [Validators.minLength(8)])
 
   async UpdateUserInfo(){
-    let name = this.todoService.currentUserInfo!.name;
-    let email = this.todoService.currentUserInfo!.email;
-    let password = "keep old";
-    if(this.pwdFormControl.value && this.pwdFormControl.valid){
-      password = this.pwdFormControl.value;
-    }
+    let fieldsToAdd: string[] = [];
+    let name = "";
+    let email = "";
+    let password = "";
     if(this.nameFormControl.value){
+      fieldsToAdd.push("name");
       name = this.nameFormControl.value;
     }
-    if(this.emailFormControl.value && this.emailFormControl.valid){
+    if(this.emailFormControl.value && this.emailFormControl.valid && this.emailFormControl.value != this.todoService.currentUserInfo?.email){
+      fieldsToAdd.push("email");
       email = this.emailFormControl.value;
     }
-    let updateSuccessful = await this.todoService.UpdateUserInfo(name, email, password);
+    if(this.pwdFormControl.value && this.pwdFormControl.valid){
+      fieldsToAdd.push("password");
+      password = this.pwdFormControl.value;
+    }
+    let updateSuccessful = await this.todoService.UpdateUserInfo(fieldsToAdd, name, email, password);
     if(updateSuccessful){
       this.router.navigate(["/account"]);
     }

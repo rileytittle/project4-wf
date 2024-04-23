@@ -86,19 +86,17 @@ export class TodoService {
       alert("There was an error. Try logging in again...");
     }
   }
-  async UpdateUserInfo(name:string, email:string, password:string){
-    let userData;
-    if(password == "keep old"){
-      userData = {
-        name: name,
-        email: email
+  async UpdateUserInfo(fieldsToAdd: string[], name:string, email:string, password:string){
+    let userData: any = {}
+    for(let field of fieldsToAdd){
+      if(field == "name"){
+        userData["name"] = name;
       }
-    }
-    else{
-      userData = {
-        name: name,
-        email: email,
-        password: password
+      if(field = "email"){
+        userData["email"] = email;
+      }
+      if(field = "password"){
+        userData["password"] = password;
       }
     }
     try{
