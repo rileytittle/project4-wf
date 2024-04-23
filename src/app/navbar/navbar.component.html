@@ -1,16 +1,24 @@
 <mat-toolbar>
-    <button [routerLink]="['/']" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button [routerLink]="['/']" matTooltip="Home" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>home</mat-icon>
     </button>
     <span>Todo Lists</span>
     <span class="example-spacer"></span>
-    <button [routerLink]="['/login']" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    @if(todoService.currentUserToken){
+      <span>Hi, {{todoService.currentUserInfo!.name}}</span>
+      <button [routerLink]="['/account']" matTooltip="Account Home" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    }
+    @else {
+    <button [routerLink]="['/login']" matTooltip="Login" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>login</mat-icon>
     </button>
-    <button [routerLink]="['/signup']" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <button [routerLink]="['/signup']" matTooltip="Create Account" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>person_add
         </mat-icon>
     </button>
+    }
 </mat-toolbar>
 <!-- <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">

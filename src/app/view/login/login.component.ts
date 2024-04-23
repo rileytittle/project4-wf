@@ -20,7 +20,6 @@ export class LoginComponent {
         let userLoggedIn = await this.todoService.LoginUser(this.emailFormControl.value, this.pwdFormControl.value)
         if(userLoggedIn){
           await this.todoService.GetUserInfo();
-          alert("Navigating to Home page...");
           this.router.navigate(["/"]);
         }
       }

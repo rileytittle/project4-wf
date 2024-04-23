@@ -22,7 +22,6 @@ export class SignupComponent {
       {
         let newUser = await this.todoService.CreateUser(this.nameFormControl.value, this.emailFormControl.value, this.pwdFormControl.value)
         if(newUser){
-          alert("Navigating to Login page...");
           this.router.navigate(["/login"]);
         }
       }

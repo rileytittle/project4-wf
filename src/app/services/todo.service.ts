@@ -86,6 +86,39 @@ export class TodoService {
       alert("There was an error. Try logging in again...");
     }
   }
+  async UpdateUserInfo(name:string, email:string, password:string){
+    let userData;
+    if(password == "keep old"){
+      userData = {
+        name: name,
+        email: email
+      }
+    }
+    else{
+      userData = {
+        name: name,
+        email: email,
+        password: password
+      }
+    }
+    try{
+      let newUserInfo = await firstValueFrom(this.httpClient.patch<UserInfo>(`${environment.BASE_URL}/user`, userData));
+      this.currentUserInfo = newUserInfo;
+      await this.LoginUser(this.currentUserInfo.email, password);
+      return true;
+    }
+    catch(err:any){
+      if(err.status == 400){
+        this._snackBar.open("Email already in use, try another", "Ok", {duration: 3000});
+        return false;
+      }
+      else if(err.status == 401){
+        this._snackBar.open("Not authorized", "Ok", {duration: 3000});
+        return false;
+      }
+      return false;
+    }
+  }
   ShowTodo(listId: number){
     this.todoToShow = listId;
   }

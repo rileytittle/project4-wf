@@ -22,6 +22,9 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TodolistComponent } from './view/todolist/todolist.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { AccountComponent } from './view/account/account.component';
+import { UpdateaccountComponent } from './view/updateaccount/updateaccount.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { TodolistComponent } from './view/todolist/todolist.component';
     LoginComponent,
     HomeComponent,
     SignupComponent,
-    TodolistComponent
+    TodolistComponent,
+    AccountComponent,
+    UpdateaccountComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import { TodolistComponent } from './view/todolist/todolist.component';
     ReactiveFormsModule,
     MatCardModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
