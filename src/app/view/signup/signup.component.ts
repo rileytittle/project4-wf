@@ -18,9 +18,20 @@ export class SignupComponent {
 
   async CreateUser(){
     if(this.nameFormControl.value && this.emailFormControl.value && this.pwdFormControl.value){
-      await this.todoService.CreateUser(this.nameFormControl.value, this.emailFormControl.value, this.pwdFormControl.value)
-      this._snackbar.open("Navigating to Login page...", "Ok", {duration: 1000});
-      this.router.navigate(["/login"]);
+      if(this.nameFormControl.valid && this.emailFormControl.valid && this.pwdFormControl.valid)
+      {
+        let newUser = await this.todoService.CreateUser(this.nameFormControl.value, this.emailFormControl.value, this.pwdFormControl.value)
+        if(newUser){
+          alert("Navigating to Login page...");
+          this.router.navigate(["/login"]);
+        }
+      }
+      else if(this.emailFormControl.invalid){
+        this._snackbar.open("Please enter a valid email", "Ok", {duration: 3000});
+      }
+      else if(this.pwdFormControl.invalid){
+        this._snackbar.open("Please enter a password that is at least 8 characters", "Ok", {duration: 3000});
+      }
     }
     else{
       this._snackbar.open("Please fill all the fields", "OK", {duration: 3000});

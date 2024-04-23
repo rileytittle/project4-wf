@@ -4,7 +4,7 @@
         <mat-tab label="Public Lists">
             <mat-list role="list">
               <mat-list-item *ngFor="let todoList of todoArray" role="listitem">
-                <button mat-button>{{todoList.title}}</button>
+                <button mat-button (click)="showTodoList(todoList.id)">{{todoList.title}}</button>
               </mat-list-item>
               </mat-list>              
         </mat-tab>
@@ -15,16 +15,16 @@
         </mat-tab>
         <mat-tab label="Shared With Me">
             <mat-list role="list">
+              @if (userInfo){
                 <mat-list-item role="listitem">Item 1</mat-list-item>
-                <mat-list-item role="listitem">Item 2</mat-list-item>
-                <mat-list-item role="listitem">Item 3</mat-list-item>
+              }
               </mat-list>              
         </mat-tab>
       </mat-tab-group>
     </mat-drawer>
   
     <div class="example-sidenav-content">
-      <!--Here's where my main stuff will go-->
+      <app-todolist></app-todolist>
     </div>
   
 </mat-drawer-container>

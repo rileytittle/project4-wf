@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { TodolistComponent } from './view/todolist/todolist.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     NavbarComponent,
     LoginComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    TodolistComponent
   ],
   imports: [
     BrowserModule,
