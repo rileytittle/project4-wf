@@ -86,23 +86,27 @@ export class TodoService {
       alert("There was an error. Try logging in again...");
     }
   }
-  async UpdateUserInfo(fieldsToAdd: string[], name:string, email:string, password:string){
-    let userData: any = {}
-    for(let field of fieldsToAdd){
-      if(field == "name"){
-        userData["name"] = name;
+  async UpdateUserInfo(currentPassword:string, name:string, email:string, password:string){
+    let headers = new HttpHeaders({
+      "authorization": `Bearer ${this.currentUserToken?.token}`
+    })
+    let userData;
+    if(password == "use current"){
+      userData = {
+        name: name,
+        email: email
       }
-      if(field = "email"){
-        userData["email"] = email;
-      }
-      if(field = "password"){
-        userData["password"] = password;
+    }
+    else{
+      userData = {
+        name: name,
+        email: email,
+        password: password
       }
     }
     try{
-      let newUserInfo = await firstValueFrom(this.httpClient.patch<UserInfo>(`${environment.BASE_URL}/user`, userData));
-      this.currentUserInfo = newUserInfo;
-      await this.LoginUser(this.currentUserInfo.email, password);
+      let newUserInfo = await firstValueFrom(this.httpClient.patch<UserInfo>(`${environment.BASE_URL}/user`, userData, {headers: headers}));
+      this.LogOut();
       return true;
     }
     catch(err:any){
@@ -111,11 +115,15 @@ export class TodoService {
         return false;
       }
       else if(err.status == 401){
-        this._snackBar.open("Not authorized", "Ok", {duration: 3000});
+        this._snackBar.open("Incorrect password", "Ok", {duration: 3000});
         return false;
       }
       return false;
     }
+  }
+  LogOut(){
+    this.currentUserInfo = null;
+    this.currentUserToken = null;
   }
   ShowTodo(listId: number){
     this.todoToShow = listId;

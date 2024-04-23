@@ -1,34 +1,35 @@
 <div class="main-div mat-app-background">
     <mat-card class="mat-card-content">
         <mat-card-content class="mat-card-content">
-            <h2>Sign Up</h2>
+            <h2>Update Info</h2>
             <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput type="text" [formControl]="nameFormControl"/>
-                @if (nameFormControl.hasError("required")){
-                    <mat-error>Name is <strong>required</strong></mat-error>
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder="Current Password" [formControl]="oldPwdFormControl"/>
+                @if (oldPwdFormControl.hasError("required")){
+                    <mat-error>Current Password is <strong>required</strong></mat-error>
                 }
             </mat-form-field>
             <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput type="text" placeholder="New Name(Optional)" [formControl]="nameFormControl"/>
+            </mat-form-field>
+            <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+                <input type="email" placeholder="New Email(Optional)" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
                 @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
                 <mat-error>Please enter a valid email address</mat-error>
-                }
-                @if (emailFormControl.hasError('required')) {
-                <mat-error>Email is <strong>required</strong></mat-error>
                 }
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput type="password" [formControl]="pwdFormControl"/>
+                <input matInput type="password" placeholder="New Password(Optional)" [formControl]="pwdFormControl"/>
                 @if (pwdFormControl.hasError("required")){
                     <mat-error>Password is <strong>required</strong></mat-error>
                 }
             </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button (click)="UpdateUserInfo()">Sign Up</button>
+            <button mat-button (click)="UpdateUserInfo()">Update</button>
         </mat-card-actions>
     </mat-card>
 </div>
