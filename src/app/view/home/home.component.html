@@ -20,13 +20,9 @@
             </mat-list>              
         </mat-tab>
         <mat-tab label="Shared With Me">
-          <mat-list *ngIf="userInfo && todoService.todoSharedWMe && todoService.todoSharedWMe.length != 0" role="list">
-            <div *ngFor="let todoList of todoService.todoSharedWMe">
-              <mat-list-item role="listitem">
-                <button mat-button (click)="showTodoList(todoList.id)">{{todoList.title}}</button>
-              </mat-list-item>
-            </div>
-          </mat-list>              
+          <mat-list role="list">
+            
+          </mat-list>
         </mat-tab>
       </mat-tab-group>
     </mat-drawer>
