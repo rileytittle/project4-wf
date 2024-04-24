@@ -5,10 +5,13 @@
     <span>Todo Lists</span>
     <span class="example-spacer"></span>
     @if(todoService.currentUserToken){
-      <span>Hi, {{todoService.currentUserInfo!.name}}</span>
+      <button [routerLink]="['/createtodo']" matTooltip="Create Todo List" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>add_circle</mat-icon>
+      </button>
       <button [routerLink]="['/account']" matTooltip="Account Home" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>account_circle</mat-icon>
-    </button>
+      </button>
+      <span>Hi, {{todoService.currentUserInfo!.name}}</span>
     }
     @else {
     <button [routerLink]="['/login']" matTooltip="Login" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">

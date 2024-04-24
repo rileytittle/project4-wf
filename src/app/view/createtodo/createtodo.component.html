@@ -1,0 +1,35 @@
+<div class="mat-app-background">
+    <span></span>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Create a New Todo Item
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form>
+                <mat-form-field>
+                    <mat-label>Title</mat-label>
+                    <input matInput type="text" [formControl]="titleFormControl">
+                    @if(titleFormControl.invalid){
+                        <mat-error>List title required</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>List status</mat-label>
+                    <mat-select [formControl]="publicStatusFormControl">
+                        <mat-option value="Public">Public</mat-option>
+                        <mat-option value="Private">Private</mat-option>
+                    </mat-select>
+                    @if(publicStatusFormControl.invalid){
+                        <mat-error>List status required</mat-error>
+                    }
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="CreateTodo()">Create</button>
+        </mat-card-actions>
+    </mat-card>
+    <span></span>
+</div>

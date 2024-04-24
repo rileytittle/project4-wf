@@ -1,0 +1,24 @@
+mat-card{
+    width:90%;
+}
+.main-div{
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.example-spacer {
+    flex: 1 1 auto;
+}
+mat-card-header{
+    display: flex;
+    padding: 16px 16px 0;
+}
+.header-content{
+    flex: 1;
+}
+.header-icons{
+    flex-shrink: 0;
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 
 @Component({
@@ -7,5 +7,5 @@ import { TodoService } from '../../services/todo.service';
   styleUrl: './todolist.component.css'
 })
 export class TodolistComponent {
-  constructor(public todoService: TodoService){}
+  constructor(public todoService: TodoService){ }
 }

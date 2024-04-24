@@ -27,6 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   showTodoList(listId: number){
-    this.todoService.ShowTodo(listId);
+    this.todoService.GetTodo(listId);
   }
 }

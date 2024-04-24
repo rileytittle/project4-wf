@@ -25,6 +25,9 @@ import { TodolistComponent } from './view/todolist/todolist.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { AccountComponent } from './view/account/account.component';
 import { UpdateaccountComponent } from './view/updateaccount/updateaccount.component';
+import { CreatetodoComponent } from './view/createtodo/createtodo.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { UpdateaccountComponent } from './view/updateaccount/updateaccount.compo
     SignupComponent,
     TodolistComponent,
     AccountComponent,
-    UpdateaccountComponent
+    UpdateaccountComponent,
+    CreatetodoComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,9 @@ import { UpdateaccountComponent } from './view/updateaccount/updateaccount.compo
     MatCardModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { HomeComponent } from './view/home/home.component';
 import { SignupComponent } from './view/signup/signup.component';
 import { AccountComponent } from './view/account/account.component';
 import { UpdateaccountComponent } from './view/updateaccount/updateaccount.component';
+import { CreatetodoComponent } from './view/createtodo/createtodo.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path:"updateaccount",
     component: UpdateaccountComponent
+  },
+  {
+    path:"createtodo",
+    component: CreatetodoComponent
   }
 ];
 

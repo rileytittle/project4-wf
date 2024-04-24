@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { firstValueFrom, of } from 'rxjs';
+import { first, firstValueFrom, of } from 'rxjs';
 import { UserToken } from '../model/usertoken';
 import { UserInfo } from '../model/userinfo';
 import { TodoInfo } from '../model/todoinfo';
@@ -16,13 +16,80 @@ export class TodoService {
   currentUserInfo: UserInfo | null = null;
   todoArray: TodoInfo[] = [];
   todoToShow: number | null = null;
+  selectedTodoList: TodoInfo | null=null;
+  todoListCreated: Date | null=null;
+  dateString: string | null=null;
   constructor(private httpClient:HttpClient, private _snackBar: MatSnackBar) { }
 
+  async CreateTodo(title:string, listStatus:string){
+    let headers = new HttpHeaders({
+      "authorization": `Bearer ${this.currentUserToken?.token}`
+    })
+    let todoData;
+    if(listStatus == "Public"){
+      todoData = {
+        "title": title,
+        "public_list": true
+      }
+    }
+    else{
+      todoData = {
+        "title": title,
+        "public_list": false
+      }
+    }
+    try{
+      let todoList = await firstValueFrom(this.httpClient.post(`${environment.BASE_URL}/todo/`, todoData, {headers: headers}));
+      return firstValueFrom(of(true));
+    }
+    catch(err:any){
+      if(err.status == 400){
+        this._snackBar.open("Title is required", "Ok", {duration: 3000});
+      }
+      if(err.status == 401){
+        this._snackBar.open("Unauthorized", "Ok", {duration: 3000});
+      }
+      return firstValueFrom(of(true));
+    }
+  }
+
+  async GetTodo(listId:number){
+    let headers = new HttpHeaders({
+      "authorization": `Bearer ${this.currentUserToken?.token}`
+    })
+    try{
+      if(this.currentUserToken){
+        let receivedTodo = await firstValueFrom(this.httpClient.get<TodoInfo>(`${environment.BASE_URL}/todo/${listId}`, {headers: headers}));
+        this.selectedTodoList = receivedTodo;
+      }
+      else{
+        let receivedTodo = await firstValueFrom(this.httpClient.get<TodoInfo>(`${environment.BASE_URL}/todo/${listId}`));
+        this.selectedTodoList = receivedTodo;
+      }
+      this.todoListCreated = new Date(this.selectedTodoList.created_at)
+      let month = this.todoListCreated.toLocaleString("default", { month: "long" });
+      let day = this.todoListCreated.getDate();
+      let year = this.todoListCreated.getFullYear();
+      this.dateString = `${month} ${day}, ${year}`
+      return firstValueFrom(of(true));
+    }
+    catch(err:any){
+      if(err.status == 401){
+        this._snackBar.open("Unauthorized", "Ok", {duration: 3000});
+      }
+      else if(err.status == 404){
+        this._snackBar.open("Todo list not found", "Ok", {duration: 3000});
+      }
+      return firstValueFrom(of(false));
+    }
+  }
   async GetTodos(){
     if(this.currentUserInfo){
+      console.log("called")
       return firstValueFrom(of(this.todoArray))
     }
     else{
+      console.log("calledx")
       this.todoArray = await firstValueFrom(this.httpClient.get<TodoInfo[]>(`${environment.BASE_URL}/todo`));
       return this.todoArray
     }
@@ -124,8 +191,5 @@ export class TodoService {
   LogOut(){
     this.currentUserInfo = null;
     this.currentUserToken = null;
-  }
-  ShowTodo(listId: number){
-    this.todoToShow = listId;
   }
 }
