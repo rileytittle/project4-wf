@@ -19,6 +19,7 @@ export class TodoService {
   selectedTodoList: TodoInfo | null=null;
   todoListCreated: Date | null=null;
   dateString: string | null=null;
+  createItem: boolean = false;
   constructor(private httpClient:HttpClient, private _snackBar: MatSnackBar) { }
 
   async CreateTodo(title:string, listStatus:string){

@@ -28,6 +28,9 @@ import { UpdateaccountComponent } from './view/updateaccount/updateaccount.compo
 import { CreatetodoComponent } from './view/createtodo/createtodo.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CreatetodoitemComponent } from './view/createtodoitem/createtodoitem.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import {MatDividerModule} from '@angular/material/divider';
     TodolistComponent,
     AccountComponent,
     UpdateaccountComponent,
-    CreatetodoComponent
+    CreatetodoComponent,
+    CreatetodoitemComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSnackBarModule,
     MatTooltipModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

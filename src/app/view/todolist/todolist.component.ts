@@ -8,4 +8,8 @@ import { TodoService } from '../../services/todo.service';
 })
 export class TodolistComponent {
   constructor(public todoService: TodoService){ }
+  
+  async CreateItem(){
+    this.todoService.createItem = true;
+  }
 }
