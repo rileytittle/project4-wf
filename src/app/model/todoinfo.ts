@@ -6,4 +6,5 @@ export interface TodoInfo {
     public_list: boolean;
     created_by: number;
     list_items: TodoItem[];
+    shared_with: {"email":string, "name":string}[];
 }

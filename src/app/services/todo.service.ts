@@ -83,15 +83,30 @@ export class TodoService {
       return firstValueFrom(of(false));
     }
   }
+  //TODO: make private and shared lists of todolists
   async GetTodos(){
     if(this.currentUserInfo){
-      console.log("called")
-      return firstValueFrom(of(this.todoArray))
+      let headers = new HttpHeaders({
+        "authorization": `Bearer ${this.currentUserToken?.token}`
+      })
+      this.todoArray = await firstValueFrom(this.httpClient.get<TodoInfo[]>(`${environment.BASE_URL}/todo`, {headers: headers}));
+      // for(let todo of this.todoArray){
+      //   let receivedTodo = await firstValueFrom(this.httpClient.get<TodoInfo>(`${environment.BASE_URL}/todo/${todo.id}`, {headers: headers}));
+      //   if(typeof receivedTodo !== "boolean"){
+      //     if(receivedTodo.shared_with && receivedTodo.shared_with.length != 0){
+      //       for(let user of receivedTodo.shared_with){
+      //         if(user.email == this.currentUserInfo.email){
+      //           this.todoSharedWMe.push(receivedTodo)
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+      return this.todoArray;
     }
     else{
-      console.log("calledx")
       this.todoArray = await firstValueFrom(this.httpClient.get<TodoInfo[]>(`${environment.BASE_URL}/todo`));
-      return this.todoArray
+      return this.todoArray;
     }
   }
   async CreateUser(name:string, email:string, password:string){
