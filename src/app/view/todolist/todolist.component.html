@@ -1,24 +1,55 @@
-<div *ngIf="!todoService.createItem">
     <div class="main-div">
-        <mat-card *ngIf="todoService.selectedTodoList">
+        <mat-card *ngIf="selectedTodoList">
             <mat-card-header>
                 <div class="header-content">
-                    <mat-card-title>{{todoService.selectedTodoList.title}}</mat-card-title>
-                    <mat-card-subtitle>Created on: {{todoService.dateString}}</mat-card-subtitle>
+                    <mat-card-title>{{selectedTodoList.title}}</mat-card-title>
+                    <mat-card-subtitle>Created on: {{dateString}}</mat-card-subtitle>
                 </div>
                 <div class="header-icons">
-                    <mat-icon *ngIf="todoService.selectedTodoList.public_list" mat-icon-button matTooltip="Public List">public</mat-icon>
-                    <mat-icon *ngIf="!todoService.selectedTodoList.public_list" mat-icon-button matTooltip="Private List">visibility_lock</mat-icon>
-                    <div *ngIf="todoService.currentUserInfo">
-                        <button *ngIf="todoService.selectedTodoList.created_by == todoService.currentUserInfo.id" (click)="CreateItem()">
-                            <mat-icon mat-icon-button class="material-symbols-outlined" matTooltip="Add item">add_circle</mat-icon>
-                        </button>
+                    <mat-icon *ngIf="selectedTodoList.public_list" mat-icon-button matTooltip="Public List">public</mat-icon>            
+                    <div *ngIf="currentUserInfo">
+                        <mat-icon *ngIf="currentUserInfo.id == selectedTodoList.created_by" 
+                                mat-icon-button 
+                                matTooltip="Your Todo List" 
+                                class="material-symbols-outlined">
+                            person
+                        </mat-icon>
+                        <mat-icon *ngIf="selectedTodoList.created_by == currentUserInfo.id" 
+                                (click)="ShowItemCreator()" 
+                                class="material-symbols-outlined" 
+                                mat-icon-button 
+                                matTooltip="Create new item">
+                            add_circle
+                        </mat-icon>
+                        <mat-icon *ngIf="selectedTodoList.created_by == currentUserInfo.id"
+                                (click)="DeleteList()"
+                                class="material-symbols-outlined"
+                                mat-icon-button
+                                matTooltip="Delete todo list">
+                            delete
+                        </mat-icon>
+                        <mat-icon *ngIf="selectedTodoList.created_by == currentUserInfo.id"
+                                (click)="ShareItem()"
+                                class="material-symbols-outlined"
+                                mat-icon-button
+                                matTooltip="Share todo list">
+                            person_add
+                        </mat-icon>
+                        <div *ngFor="let sharedUser of selectedTodoList.shared_with">
+                            <mat-icon *ngIf="currentUserInfo.email == sharedUser.email" 
+                                    (click)="ShowItemCreator()" 
+                                    class="material-symbols-outlined" 
+                                    mat-icon-button 
+                                    matTooltip="Create new item">
+                                add_circle
+                            </mat-icon>
+                        </div>
                     </div>
                 </div>
             </mat-card-header>
             <mat-card-content>
                 <mat-list>
-                    <div *ngFor="let item of todoService.selectedTodoList.list_items">
+                    <div *ngFor="let item of selectedTodoList.list_items">
                         <mat-list-item>{{item.task}}</mat-list-item>
                         <mat-divider></mat-divider>
                     </div>
@@ -26,8 +57,4 @@
             </mat-card-content>
         </mat-card>
     </div>
-</div>
-<div *ngIf="todoService.createItem">
-    <app-createtodoitem></app-createtodoitem>
-</div>
-<div *ngIf="todoService.selectedTodoList == null">Click a todo list to show its details!</div>
+<div *ngIf="selectedTodoList == null"  class="main-div">Click a todo list to show its details!</div>

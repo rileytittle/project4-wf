@@ -20,14 +20,18 @@
             </mat-list>              
         </mat-tab>
         <mat-tab label="Shared With Me">
-          <mat-list role="list">
-            
+          <mat-list *ngIf="userInfo" role="list">
+            <div *ngFor="let todoList of todoArray">
+              <mat-list-item *ngIf="todoList.created_by != userInfo.id && todoList.public_list == false" role="listitem">
+                <button mat-button (click)="showTodoList(todoList.id)">{{todoList.title}}</button>
+              </mat-list-item>
+            </div>
           </mat-list>
         </mat-tab>
       </mat-tab-group>
     </mat-drawer>
   
-    <div>
+    <div *ngIf="todoSelected">
       <app-todolist></app-todolist>
     </div>
   

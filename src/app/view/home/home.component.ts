@@ -11,11 +11,13 @@ import { UserInfo } from '../../model/userinfo';
 export class HomeComponent implements OnInit, OnDestroy{
   showFiller = false;
   todoArray: TodoInfo[] =[];
+  todoSelected: boolean | null = null;
   userInfo: UserInfo | null = null;
   //ShowTodo: EventEmitter<number> = new EventEmitter<number>
   constructor(private todoService: TodoService) {}
 
   async ngOnInit() {
+    this.todoSelected = true;
     console.log("Initiated")
     this.todoArray = await this.todoService.GetTodos()
     this.userInfo = this.todoService.currentUserInfo;
@@ -24,9 +26,12 @@ export class HomeComponent implements OnInit, OnDestroy{
   ngOnDestroy(){
     console.log("Destroyed")
     this.todoService.todoToShow = null;
+    this.todoService.selectedTodoList = null;
   }
 
-  showTodoList(listId: number){
-    this.todoService.GetTodo(listId);
+  async showTodoList(listId: number){
+    this.todoSelected = false;
+    console.log("clicked!")
+    this.todoSelected = await this.todoService.GetTodo(listId);
   }
 }

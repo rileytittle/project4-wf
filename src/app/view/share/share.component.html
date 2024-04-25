@@ -1,0 +1,39 @@
+<div class="main-div mat-app-background">
+    <mat-card>
+        <mat-card-header>
+            <h2>Shared With</h2>
+        </mat-card-header>
+        <mat-card-content *ngIf="selectedTodoList" >
+            <mat-list *ngIf="selectedTodoList.shared_with.length != 0" role="list">
+                <mat-list-item *ngFor="let user of selectedTodoList.shared_with" role="listitem">
+                    <div>
+                        Email: {{user.email}}
+                        <mat-icon
+                                (click)="RemoveSharedUser(user.email)"
+                                class="material-symbols-outlined"
+                                mat-icon-button
+                                matTooltip="Remove shared user">
+                            delete
+                        </mat-icon>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+            <h2>Shared Todo List</h2>
+            <form>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+                    @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                    }
+                    @if (emailFormControl.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="ShareList()">Share</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -2,11 +2,11 @@
     <mat-card class="mat-card-content">
         <mat-card-header>
             <mat-card-title>Account</mat-card-title>
-            <mat-card-subtitle>Hi, {{todoService.currentUserInfo!.name}}</mat-card-subtitle>
+            <mat-card-subtitle>Hi, {{currentUserInfo!.name}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="mat-card-content">
-            <p>Name: {{todoService.currentUserInfo!.name}}</p>
-            <p>Email: {{todoService.currentUserInfo!.email}}</p>
+            <p>Name: {{currentUserInfo!.name}}</p>
+            <p>Email: {{currentUserInfo!.email}}</p>
         </mat-card-content>
         <mat-card-actions>
             <button [routerLink]="['/updateaccount']">Update Info</button>

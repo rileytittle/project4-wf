@@ -19,7 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TodolistComponent } from './view/todolist/todolist.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -31,6 +31,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreatetodoitemComponent } from './view/createtodoitem/createtodoitem.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import { btinterInterceptor } from './interceptors/btinter.interceptor';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { DatePipe } from '@angular/common';
+import { MessageComponent } from './view/message/message.component';
+import { ShareComponent } from './view/share/share.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +49,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AccountComponent,
     UpdateaccountComponent,
     CreatetodoComponent,
-    CreatetodoitemComponent
+    CreatetodoitemComponent,
+    MessageComponent,
+    ShareComponent
   ],
   imports: [
     BrowserModule,
@@ -66,9 +74,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatSelectModule,
     MatDividerModule,
     MatDialogModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatProgressBarModule,
+    DatePipe
   ],
-  providers: [],
+  providers: [
+    provideNativeDateAdapter(),
+    provideHttpClient(withInterceptors([btinterInterceptor])),
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

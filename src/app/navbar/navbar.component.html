@@ -23,6 +23,7 @@
     </button>
     }
 </mat-toolbar>
+<mat-progress-bar *ngIf="todoService.showProgressBar" mode="indeterminate"></mat-progress-bar>
 <!-- <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
       <mat-tab-group>
