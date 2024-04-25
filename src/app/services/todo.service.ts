@@ -141,6 +141,55 @@ export class TodoService {
       return firstValueFrom(of(false));
     }
   }
+
+  async UpdateItem(item:TodoItem){
+    let itemData = {
+      task: item.task,
+      due_date: item.due_date,
+      completed: !item.completed
+    }
+    try{
+      await firstValueFrom(this.httpClient.patch(`${environment.BASE_URL}/todo/${item.list_id}/item/${item.id}`, itemData))
+      return firstValueFrom(of(true))
+    }
+    catch(err:any){
+      if(err.status == 400){
+        this._snackBar.open("Invalid value for due date", "Ok", {duration:3000});
+      }
+      else if(err.status == 401){
+        this._snackBar.open("Not Authorized", "Ok", {duration:3000});
+      }
+      else if(err.status == 403){
+        this._snackBar.open("Unauthorized to update", "Ok", {duration:3000});
+      }
+      else if(err.status == 404){
+        this._snackBar.open("Todo list item not found", "Ok", {duration:3000});
+      }
+      return firstValueFrom(of(false))
+    }
+  }  
+  async DeleteItem(item:TodoItem){
+    try{
+      let response = await firstValueFrom(this.httpClient.delete(`${environment.BASE_URL}/todo/${item.list_id}/item/${item.id}`));
+      console.log("Deleted!")
+      this.selectedTodoList = null;
+      this.todoListToMakeItemFor = null;
+      this.todoListToShare = null;
+      return firstValueFrom(of(true))
+    }
+    catch(err:any){
+      if(err.status == 401){
+        this._snackBar.open("Not Authorized", "Ok", {duration:3000});
+      }
+      else if(err.status == 403){
+        this._snackBar.open("Unauthorized to delete", "Ok", {duration:3000});
+      }
+      else if(err.status == 404){
+        this._snackBar.open("Todo list item not found", "Ok", {duration:3000});
+      }
+      return firstValueFrom(of(false))
+    }
+  }
   async GetTodo(listId:number){
     // let headers = new HttpHeaders({
     //   "authorization": `Bearer ${this.currentUserToken?.token}`

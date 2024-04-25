@@ -50,7 +50,20 @@
             <mat-card-content>
                 <mat-list>
                     <div *ngFor="let item of selectedTodoList.list_items">
-                        <mat-list-item>{{item.task}}</mat-list-item>
+                        <mat-list-item class="todo-item">
+                            <mat-checkbox *ngIf="!item.completed" checked="false" class="item-content" (click)="UpdateItem(item)"></mat-checkbox>
+                            <mat-checkbox *ngIf="item.completed" checked="true" class="item-content" (click)="UpdateItem(item)"></mat-checkbox>
+                            {{item.task}}
+                            @if(item.due_date){
+                                | Due Date: {{item.due_date.substring(0, 10)}}
+                            }
+                            @if(currentUserInfo && (selectedTodoList.created_by == currentUserInfo.id)){
+                                <button class="item-icons" (click)="DeleteItem(item)" mat-raised-button color="primary">Delete</button>
+                            }
+                            @if(ListSharedWithUser()){
+                                <button class="item-icons" (click)="DeleteItem(item)" mat-raised-button color="primary">Delete</button>
+                            }
+                        </mat-list-item>
                         <mat-divider></mat-divider>
                     </div>
                 </mat-list>

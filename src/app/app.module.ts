@@ -37,6 +37,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { DatePipe } from '@angular/common';
 import { MessageComponent } from './view/message/message.component';
 import { ShareComponent } from './view/share/share.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ShareComponent } from './view/share/share.component';
     MatDialogModule,
     MatDatepickerModule,
     MatProgressBarModule,
-    DatePipe
+    DatePipe,
+    MatCheckboxModule
   ],
   providers: [
     provideNativeDateAdapter(),

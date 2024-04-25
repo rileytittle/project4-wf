@@ -22,3 +22,10 @@ mat-card-header{
     display: flex;
     justify-content: flex-end;
 }
+.todo-item{
+    display: flex;
+    flex-direction: row;
+}
+.item-icons{
+    float: right;
+}
